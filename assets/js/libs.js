@@ -1,8 +1,8 @@
 const app = (()=>{
 
 	const PATH = {
-		LOGIN: '/admin/',
-		LOGED: '/admin/admin.html'
+		LOGIN: '/',
+		LOGED: '/admin.html'
 	}
 	function EventHandle(a,b){let c={};function d(b){Object.defineProperty(a,b,{set:function(a){if("function"==typeof a){let d=a.name||"__";c[b]=c[b]||{},c[b][d]=c[b][d]||[],c[b][d].push(a)}else throw"handle is not a function"}}),Object.defineProperty(a.handle,b,{get:function(){var a;return a=b,Object.freeze({fire(d){for(let e in c[a]){let b=c[a][e];for(let f in b)b[f](d)}},remove(b){b=b||"__",delete c[a][b]},clear(){c[a]={}}})}})}return a.handle={add(a){for(let b in a)d(a[b])},listen(b,c){d(b),a[b]=c}},!function(){for(let a in b)d(b[a])}(),a}
 	function createStorage(a){let c=JSON.parse(localStorage.getItem(a))??{},d=()=>{localStorage.setItem(a,JSON.stringify(c))},e={get:a=>c[a],set(a,b){c[a]=b,d()},remove(a){delete c[a],d()},destroy(){localStorage.removeItem(a)},clear(){c={},d()}},b={};return!function(){for(let a in e)Object.defineProperty(b,a,{get:function(){return e[a]}})}(),b}
