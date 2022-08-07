@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="robots" content="noodp,index,follow" />
+	<meta name=’revisit-after’ content=’1 days’ />
+	<meta name="description" content="Admin template" />
+	<meta http-equiv="content-language" content="vi" />
+	<meta property="og:image" content="assets/imgs/thumbnail.png">
+
+	<link rel="icon" type="image/x-icon" href="assets/imgs/favicon.ico">
+	<meta property="og:image" content="assets/imgs/thumbnail.png">
+
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+	<script type="text/javascript" src="assets/js/libs.js"></script>
+	<script type="text/javascript" src="assets/js/vue.js"></script>
+</head>
+<body>
+
+	<div id="app">
+		<title>Admin - {{ title }}</title>
+
+		<header class="flex">
+			<div class="cols z-3">Logo</div>
+			<div class="cols z-6 text-c">Search</div>
+			<div class="cols z-3 text-r curs" onclick="app.auth.logout()">Đăng xuất</div>
+		</header>
+		<main></main>
+		<footer></footer>
+	</div>
+
+	<script type="text/javascript" src="assets/js/admin.js"></script>
+</body>
+</html>
