@@ -5,3 +5,34 @@
     color: rgb(255 255 255 / 60%);
     text-shadow: 0px 3px 0px #b2a98f, 0px 14px 10px rgb(0 0 0 / 6%), 0px 24px 2px rgb(0 0 0 / 3%), 0px 34px 30px rgb(0 0 0 / 10%);
 }
+
+.modal{
+	display: none;
+	z-index: 999;
+	background: #0009;
+}
+
+.modal-on{
+	display: block;
+}
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 100px;
+  height: 100px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

@@ -22,6 +22,15 @@
 	<script type="text/javascript" src="assets/js/script.js"></script>
 </head>
 <body class="flex-c b-full unselect">
+	<div class="b-full modal flex" id="loader">
+		<div class="loader margin-a"></div>
+	</div>
+
+	<div class="b-full modal flex" id="modal" onclick="event.target === this? this.style.display = null: ''">
+		<div class="modal-container margin-a padding z-4 bg-white m-cols">
+		</div>
+	</div>
+
 	<h1 class="text-c margin-h z-12 title">Administrator</h1>
 	<form class="form margin-a padding size z-5 shadow" onsubmit="login(event)">
 		
@@ -53,5 +62,6 @@
 
 	</form>
 
+	<script type="text/javascript" src="assets/js/all.js"></script>
 </body>
 </html>
