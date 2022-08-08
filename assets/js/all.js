@@ -12,6 +12,7 @@
 	}
 
 	app.auth.ajax.onError = function(e){
+		loader.style.display = null;
 		if(!e.message)
 			return;
 		let messages = JSON.parse(e.message);
