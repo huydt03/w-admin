@@ -190,7 +190,7 @@ a{
 	display: flex;
 }
 
-.flex-c{
+.flex-h{
 	display: flex;
 	flex-direction: column;
 	height: 100%;
@@ -206,23 +206,23 @@ a{
 	display: flex;
 }
 
-.rows{
-	height: calc(var(--c-1) * var(--z));
-}
-.m-rows{
-	min-height: calc(var(--c-1) * var(--z));
-}
-.mx-rows{
-	max-height: calc(var(--c-1) * var(--z));
-}
-.cols{
+.w{
 	width: calc(var(--c-1) * var(--z));
 }
-.m-cols{
+.m-w{
 	min-width: calc(var(--c-1) * var(--z));
 }
-.mx-cols{
+.mx-w{
 	max-width: calc(var(--c-1) * var(--z));
+}
+.h{
+	height: calc(var(--c-1) * var(--z));
+}
+.m-h{
+	min-height: calc(var(--c-1) * var(--z));
+}
+.mx-h{
+	max-height: calc(var(--c-1) * var(--z));
 }
 
 .size{

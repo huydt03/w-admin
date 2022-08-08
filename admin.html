@@ -26,13 +26,30 @@
 		<div class="loader margin-a"></div>
 	</div>
 
-	<div class="b-full" id="app">
-		<title>Admin - {{ title }}</title>
+	<div class="b-full modal flex" id="modal" onclick="event.target === this? this.style.display = null: ''">
+		<div class="modal-container margin-a padding z-4 bg-white m-cols">
+		</div>
+	</div>
 
-		<header class="flex">
-			<div class="cols z-3">Logo</div>
-			<div class="cols z-6 text-c">Search</div>
-			<div class="cols z-3 text-r curs" onclick="app.auth.logout()">Đăng xuất</div>
+	<div class="b-full" id="app">
+		<title>Admin - {{ app.title }}</title>
+
+		<header class="flex b-full">
+			<div class="w z-2 z-md-4 bg-info text-white">
+				<div class="user-profile text-c padding z-1">
+					<img class="w z-10" src="https://cdn-icons-png.flaticon.com/512/149/149071.png">
+				</div>
+
+				<div class="curs padding z-1" v-for="item in app.menu" @click="menu_select(item)">
+					{{ item }}
+				</div>
+			</div>
+			<div class="w z-10 flex-h">
+				<header class="h z-1 flex padding">
+					<div class="w z-9">{{ app.title }}</div>
+					<div class="w z-3 text-r curs" onclick="app.auth.logout()">Đăng xuất</div>
+				</header>
+			</div>
 		</header>
 		<main></main>
 		<footer></footer>

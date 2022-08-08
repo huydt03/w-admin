@@ -11,7 +11,7 @@ const app = (()=>{
 
 		// const URI = 'http://localhost/LumenApi/public/api';
 		const URI = 'http://20.214.166.135/public/api';
-		
+
 		let authStorage = new createStorage('auth');
 
 		let ajax = new Ajax;
