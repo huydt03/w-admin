@@ -9,8 +9,9 @@ const app = (()=>{
 	function Ajax(){let b=["onBeforeAction","onAfterAction","onSuccess","onError"],a={},c,d=new XMLHttpRequest,e={get(a,b={},c=function(){}){g(a,b,"GET",c)},post(a,b={},c=function(){}){g(a,b,"POST",c)},put(a,b={},c=function(){}){g(a,b,"PUT",c)},delete(a,b={},c=function(){}){g(a,b,"DELETE",c)}};function f(c,d){var a,e=[];for(a in c)if(c.hasOwnProperty(a)){var g=d?d+"["+a+"]":a,b=c[a];e.push(null!==b&&"object"==typeof b?f(b,g):encodeURIComponent(g)+"="+encodeURIComponent(b))}return e.join("&")}function g(g,a={},h="GET",i=function(){}){c.onBeforeAction.fire(),d.onload=function(){if(4==this.readyState&&200==this.status){let a=JSON.parse(this.responseText);i(a),c.onSuccess.fire(a)}else c.onError.fire({status:this.status,message:this.responseText});c.onAfterAction.fire(this)},d.open(h,g,!0),d.setRequestHeader("Content-type","application/x-www-form-urlencoded");let b=a._header;for(let e in b)d.setRequestHeader(e,b[e]);delete a._header,d.send(f(a))}return!function(){for(let d in c=EventHandle(a,b).handle,e)Object.defineProperty(a,d,{get:function(){return e[d]}})}(),a}
 	function Auth(){
 
-		const URI = 'http://localhost/LumenApi/public/api';
-
+		// const URI = 'http://localhost/LumenApi/public/api';
+		const URI = 'http://20.214.166.135/public/api';
+		
 		let authStorage = new createStorage('auth');
 
 		let ajax = new Ajax;
