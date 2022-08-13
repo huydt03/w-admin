@@ -1,25 +1,23 @@
 (()=>{
 
 	const MENU = [
-		['DashBroad', function(){
-		}],
+		['DashBroad'],
 		['Users',
 			[
-				['User List', function(){}],
+				[{label: 'User List', age: 1}, function(){}],
 				['Add User', function(){}]
-			],
-			function(){}
+			]
 		],
 		['Groups',
 			[
-				['GroupList',
+				['Group List',
 					[
-						['Preview', function(){}]
-					], function(){}
+						['Preview', function(){ }]
+					],
+					function(){}
 				],
 				['Add Group', function(){}]
-			],
-			function(){}
+			]
 		]
 	]
 
@@ -34,6 +32,7 @@
 				menu: menu.data
 			},
 			page: {
+				id: 0,
 				name: null
 			}
 			
@@ -45,10 +44,11 @@
 	menu.onItemAction = function(e) {
 		vue.app.title = e.label;
 		vue.app.grand_parent = e.grand_parent;
-		vue.page.name = e.label;
+		vue.page.id 	= e.id;
+		vue.page.name 	= e.label;
 	}
 
-	menu.action_from_url();
+	menu.action_by_query_key();
 
 
 })();

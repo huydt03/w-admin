@@ -1,3 +1,5 @@
+// options: { isPushState, query_key }
+// action_by_query_key() after loaded
 function JSMenu(menu, options = {}){
 
 	const EVENTS = [
@@ -5,11 +7,17 @@ function JSMenu(menu, options = {}){
 		'onItemInit'
 	];
 
-	let query_key = options.query_key || 'label';
+	let query_key = options.query_key || 'slug';
 
-	let isPopState;
+	let isPushState;
 
 	let currAction;
+
+	function convertToSlug(Text) {
+	  return Text.toLowerCase()
+	             .replace(/[^\w ]+/g, '')
+	             .replace(/ +/g, '-');
+	}
 
 	function menuItem(id, data, action = null, parent = null){
 
@@ -20,7 +28,11 @@ function JSMenu(menu, options = {}){
 
 		const {label, slug} = data;
 
-		let self = {id, label: label || data, slug};
+		let _label = label || data;
+
+		data = (typeof data == 'object')? data: [data];
+
+		let self = {...data, id, label: _label, slug: slug || convertToSlug(_label)};
 
 		let _handle;
 
@@ -45,7 +57,7 @@ function JSMenu(menu, options = {}){
 					return;
 				currAction = self;
 				_handle.onBeforeAction.fire(self);
-				if(isPopState && !e.isPopState)
+				if(isPushState && !e.isPushState)
 					window.history.pushState(self.id, self.label, `?${query_key}=${self[query_key]}`);
 				handle.onItemAction.fire(self);
 				if(typeof action == 'function')
@@ -57,7 +69,9 @@ function JSMenu(menu, options = {}){
 				id: { get: function(){ let p_id = parent? parent.id: ''; return p_id + id + ''; } },
 				_id: { get: function(){ return id; } },
 				action: { 
-					get: function(){ return _action; },
+					get: function(){ 
+						return (typeof action == 'function')? _action: new Function;
+					},
 					set: function(value){ if(typeof action == 'function'); action = value }
 				},
 				parent: { 
@@ -128,12 +142,12 @@ function JSMenu(menu, options = {}){
 		id: findItemById
 	}
 
-	function action_from_url(){
+	function action_by_query_key(){
 		const params = new Proxy(new URLSearchParams(window.location.search), {
 		  get: (searchParams, prop) => searchParams.get(prop),
 		});
-		let item = find[query_key](params[query_key]);
-		item.action({isPopState: true});
+		let item = find[query_key](params[query_key]) || result[0];
+		item.action({isPushState: true});
 	}
 
 	function init(){
@@ -143,21 +157,21 @@ function JSMenu(menu, options = {}){
 		Object.defineProperties(self, {
 			data: { get: function(){ return root; } },
 			init: { get: function(){ return initMenu; } },
-			isPopState: {
-				get: function(){ return isPopState; },
+			isPushState: {
+				get: function(){ return isPushState; },
 				set: function(value){
-					if(value) window.onpopstate = action_from_url;
+					if(value) window.onpopstate = action_by_query_key;
 					else window.onpopstate = null;
-					isPopState = value;
+					isPushState = value;
 				}
 			},
-			action_from_url: { get: function(){ return action_from_url; } },
+			action_by_query_key: { get: function(){ return action_by_query_key; } },
 			findItemById: { get: function(){ return findItemById; } },
 			findItemByLabel: { get: function(){ return findItemByLabel; } },
 			findItemBySlug: { get: function(){ return findItemBySlug; } },
 		})
 
-		self.isPopState = (options.isPopState !== false);
+		self.isPushState = (options.isPushState !== false);
 
 		delete self.handle;
 	}

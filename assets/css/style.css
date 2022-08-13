@@ -1,3 +1,7 @@
+.padding-l{
+  padding-left: calc(var(--z-1) * var(--z));
+}
+
 .title{
 	position: absolute;
     width: 100%;

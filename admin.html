@@ -38,25 +38,25 @@
 		<title>Admin - {{ app.title }}</title>
 
 		<header class="flex b-full">
-			<div class="w z-2 z-md-4 bg-info text-white">
-				<div class="h z-3">
-					<div class="user-profile text-c padding z-1">
-						<img class="w z-10" src="https://cdn-icons-png.flaticon.com/512/149/149071.png">
-					</div>
+			<div class="w z-2 z-md-4 bg-info text-white flex-h">
+				<div class="m-h z-3 padding">
+						<img class="w h z-12" src="https://cdn-icons-png.flaticon.com/512/149/149071.png">
 				</div>
 
 				<div class="h z-9">
-					<div class="padding z-1" v-for="item, key in app.menu">
-						<div class="curs" @click="item.action">{{ item.label }}</div>
-						<div v-if="item.childs">
-							<div class="padding z-1" v-for="_item in item.childs">
-							<div class="curs" @click="_item.action">{{ _item.label }}</div>
+					<div class="padding z-1">
+						<div v-for="item, key in app.menu">
+							<div class="curs  padding z-1" :bg="page.id == item.id? 4: ''" @click="item.action">{{ item.label }}</div>
 							<div v-if="item.childs">
-								<div class="padding z-1" v-for="__item in _item.childs">
-									<div class="curs" @click="__item.action">{{ __item.label }}</div>
+								<div class="padding-l z-4" v-for="_item in item.childs">
+								<div class="curs padding z-1" :bg="page.id == _item.id? 4: ''" @click="_item.action">{{ _item.label }}</div>
+								<div v-if="item.childs">
+									<div class="padding-l z-4" v-for="__item in _item.childs">
+										<div class="curs  padding z-1" :bg="page.id == __item.id? 4: ''" @click="__item.action">{{ __item.label }}</div>
+									</div>
 								</div>
 							</div>
-						</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -73,12 +73,27 @@
 				</header>
 				<main class="h z-11">
 					<div class="padding z-2">
-						{{ page.name }}
+						<div v-if="page.id == 0">
+							hehe
+						</div>
+
+						<div v-if="page.id == 1">
+							hehe1
+						</div>
+						<div v-if="page.id == 10">
+							hehe10
+						</div>
+						<div v-if="page.id == 11">
+							hehe11
+						</div>
+						
+						<div v-if="page.id == 2">
+							hehe2
+						</div>
+
+
 					</div>
 				</main>
-				<footer class="h z-1">
-					{{ page.name }}
-				</footer>
 			</div>
 		</header>
 		<main>
