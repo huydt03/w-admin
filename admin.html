@@ -2,7 +2,6 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,6 +19,7 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
 	<script type="text/javascript" src="assets/js/libs.js"></script>
+	<script type="text/javascript" src="assets/js/auth.js"></script>
 	<script type="text/javascript" src="assets/js/vue.js"></script>
 </head>
 <body>
@@ -33,31 +33,61 @@
 		</div>
 	</div>
 
-	<div class="b-full" id="app">
+	<div class="b-full unselect" id="app">
 		<title>Admin - {{ app.title }}</title>
 
 		<header class="flex b-full">
 			<div class="w z-2 z-md-4 bg-info text-white">
-				<div class="user-profile text-c padding z-1">
-					<img class="w z-10" src="https://cdn-icons-png.flaticon.com/512/149/149071.png">
+				<div class="h z-3">
+					<div class="user-profile text-c padding z-1">
+						<img class="w z-10" src="https://cdn-icons-png.flaticon.com/512/149/149071.png">
+					</div>
 				</div>
 
-				<div class="curs padding z-1" v-for="item in app.menu" @click="menu_select(item)">
-					{{ item }}
+				<div class="h z-9">
+					<div class="padding z-1" v-for="item, key in app.menu">
+						<div class="curs" @click="item.action">{{ item.label }}</div>
+						<div v-if="item.childs">
+							<div class="padding z-1" v-for="_item in item.childs">
+							<div class="curs" @click="_item.action">{{ _item.label }}</div>
+							<div v-if="item.childs">
+								<div class="padding z-1" v-for="__item in _item.childs">
+									<div class="curs" @click="__item.action">{{ __item.label }}</div>
+								</div>
+							</div>
+						</div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="w z-10 flex-h">
-				<header class="h z-1 flex padding">
-					<div class="w z-9">{{ app.title }}</div>
-					<div class="w z-3 text-r curs" onclick="app.auth.logout()">Đăng xuất</div>
+				<header class="z-3 flex padding shadow">
+					<div class="w z-9 flex">
+						<div v-for="parent, i in app.grand_parent">
+							<a href="javascript:void(0)" @click="parent[3]">{{ parent[1] }}</a>
+							<label class="margin z-1" v-if="i < app.grand_parent.length - 1">⇨</label> 
+						</div>
+					</div>
+					<div class="w z-3 text-r curs" onclick="auth.logout()">Đăng xuất</div>
 				</header>
+				<main class="h z-11">
+					<div class="padding z-2">
+						{{ page.name }}
+					</div>
+				</main>
+				<footer class="h z-1">
+					{{ page.name }}
+				</footer>
 			</div>
 		</header>
-		<main></main>
+		<main>
+			{{ page.name }}
+		</main>
 		<footer></footer>
 	</div>
 
 	<script type="text/javascript" src="assets/js/all.js"></script>
+	<script type="text/javascript" src="assets/js/admin.menu.js"></script>
 	<script type="text/javascript" src="assets/js/admin.js"></script>
 </body>
 </html>

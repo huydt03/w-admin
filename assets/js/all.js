@@ -1,17 +1,14 @@
-
-	const loader = document.getElementById('loader');
-
-	const modal = document.getElementById('modal');
-
 (()=>{
-
+	const loader = document.getElementById('loader');
+	const modal = document.getElementById('modal');
 	let modal_container = modal.querySelector('.modal-container');
 
 	function add_message(message){
 		modal_container.innerHTML += message + '<br />';
 	}
 
-	app.auth.ajax.onError = function(e){
+	// Ajax
+	auth.ajax.onError = function(e){
 		loader.style.display = null;
 		if(!e.message)
 			return;
@@ -27,14 +24,32 @@
 		}
 	}
 
-	app.auth.ajax.onBeforeAction = function(){
+	auth.ajax.onBeforeAction = function(){
 		loader.style.display = null;
 		modal.style.display = null;
 		loader.style.display = 'flex';
 	}
 
-	app.auth.ajax.onAfterAction = function(){
+	auth.ajax.onAfterAction = function(){
 		loader.style.display = null;
+	}
+
+	// FormValidate
+	new $.FormValidate(document.getElementsByTagName('form')).onFieldValidated = function(e){
+		const dom = e.el.parentElement;
+		if(e.result === true){
+			dom.setAttribute('validated', true);
+			dom.removeAttribute('data-validate');
+		}
+		else if(e.result === 1){
+			dom.removeAttribute('validated');
+			dom.removeAttribute('data-validate');
+		}
+		else{
+			if(e.result)
+				dom.setAttribute('data-validate', e.result);
+			dom.setAttribute('validated', false);
+		}
 	}
 
 })();
